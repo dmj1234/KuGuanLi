@@ -59,7 +59,20 @@ this.$router.push('/login')
 
 
 
+
 ### 报错解决方案
+#### error: Pulling is not possible because you have unmerged files.
+- 我将做好的内容再一次提交到github时使用git push报错，然后我去网上搜：第一种说路径的问题，我就把origin改成main，因为在setting里面的GitHub Pages 我将它绑到了main分支上，因此git push -u origin main 是有反应的，但是又报错： ! [rejected] main -> main (fetch first)然后我git fetch，报错：! [rejected]        main -> main (non-fast-forward)，后来找到了用了坑：将做好的代码给清掉了：git reset --hard FETCH_HEAD  将本地的冲突文件冲掉，不仅需要reset到MERGE-HEAD或者HEAD,还需要--hard。没有后面的hard，不会冲掉本地工作区。只会冲掉stage区。 说好的只会清掉暂存区的，把做好的代码给clean了。
+- 这个是备选方案：先重新整回之前的代码再：
+```js
+git fetch origin
+ 
+git merge origin/master
+ 
+git push origin master
+```
+
+
 #### 由ESLint引起的报错问题
 - 报错：error  More than 1 blank line not allowed  no-multiple-empty-lines
 - 解决：网上都说是让关eslint，尝试了下：最简单的方法就是因为有多余的行段导致的问题，只要把空行段删了就行了。
@@ -98,6 +111,8 @@ this.$router.push('/login')
 
 
                 
+
+  
 
   
 
